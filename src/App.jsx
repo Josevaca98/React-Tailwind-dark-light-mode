@@ -74,7 +74,7 @@ export default function App() {
   // Render the UI
   return (
     <section className="min-h-screen pt-8 dark:text-gray-100 dark:bg-slate-900 duration-100">
-      <div className="fixed top-5 right-10 duration-100 dark:bg-slate-800 bg-gray-100 rounded">
+      <div className="fixed top-5 right-5 duration-100 dark:bg-slate-800 bg-gray-100 rounded">
         {options?.map((opt) => (
           <button
             key={opt.text}
@@ -89,9 +89,7 @@ export default function App() {
       </div>
       <div className="max-w-3xl mx-auto px-5">
         <div className="text-center">
-          <h2 className="uppercase text-white font-ex text-4xl">
-            José Maria Vaca González
-          </h2>
+          <h2 className="uppercase text-4xl pt-10">José Maria Vaca González</h2>
           <h5 className="pt-5 font-semibold text-2xl">
             Game Developer and Frontend Developer 🎮🧑🏻‍💻
           </h5>
