@@ -5,10 +5,10 @@ export default function App() {
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "system"
   );
-  // Get the root element of the document
-  const element = document.documentElement;
-  // Match media query for dark mode preference
-  const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  // // Get the root element of the document
+  // const element = document.documentElement;
+  // // Match media query for dark mode preference
+  // const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
   // Define theme options with icons and text
   const options = [
@@ -27,7 +27,7 @@ export default function App() {
   ];
 
   // Function to match the window's color scheme preference
-  function onWindowMatch() {
+  function onWindowMatch(darkQuery, element) {
     if (
       localStorage.getItem("theme") === "dark" ||
       (!localStorage.getItem("theme") && darkQuery.matches)
@@ -62,6 +62,10 @@ export default function App() {
 
   //#region Codigo modificado
   useEffect(() => {
+    const element = document.documentElement;
+    // Match media query for dark mode preference
+    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
     switch (theme) {
       case "dark":
         element.classList.add("dark");
@@ -74,12 +78,16 @@ export default function App() {
         break;
       default:
         localStorage.removeItem("theme");
-        onWindowMatch();
+        onWindowMatch(darkQuery, element);
         break;
     }
-  }, [element.classList, onWindowMatch, theme]);
+  }, [theme]);
 
   useEffect(() => {
+    const element = document.documentElement;
+    // Match media query for dark mode preference
+    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
     const handleChange = (e) => {
       if (!localStorage.getItem("theme")) {
         if (e.matches) {
@@ -91,11 +99,12 @@ export default function App() {
     };
 
     darkQuery.addEventListener("change", handleChange);
+    onWindowMatch(darkQuery, element);
 
     return () => {
       darkQuery.removeEventListener("change", handleChange);
     };
-  }, [darkQuery, element.classList]);
+  }, []);
 
   //#endregion Codigo Modificado
 
