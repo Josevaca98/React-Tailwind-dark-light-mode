@@ -42,6 +42,25 @@ export default function App() {
   // onWindowMatch();
 
   // useEffect to update the theme when the theme state changes
+  // useEffect(() => {
+  //   switch (theme) {
+  //     case "dark":
+  //       element.classList.add("dark");
+  //       localStorage.setItem("theme", "dark");
+  //       break;
+
+  //     case "light":
+  //       element.classList.remove("dark");
+  //       localStorage.setItem("theme", "light");
+  //       break;
+  //     default:
+  //       localStorage.removeItem("theme");
+  //       onWindowMatch();
+  //       break;
+  //   }
+  // }, [element.classList, onWindowMatch, theme]);
+
+  //#region Codigo modificado
   useEffect(() => {
     switch (theme) {
       case "dark":
@@ -58,18 +77,38 @@ export default function App() {
         onWindowMatch();
         break;
     }
-  }, [element.classList, onWindowMatch, theme]);
+  }, [theme]);
+
+  useEffect(() => {
+    const handleChange = (e) => {
+      if (!localStorage.getItem("theme")) {
+        if (e.matches) {
+          element.classList.add("dark");
+        } else {
+          element.classList.remove("dark");
+        }
+      }
+    };
+
+    darkQuery.addEventListener("change", handleChange);
+
+    return () => {
+      darkQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  //#endregion Codigo Modificado
 
   // Add event listener to handle changes in color scheme preference
-  darkQuery.addEventListener("change", (e) => {
-    if (!("theme" in localStorage)) {
-      if (e.matches) {
-        element.classList.add("dark");
-      } else {
-        element.classList.remove("dark");
-      }
-    }
-  });
+  // darkQuery.addEventListener("change", (e) => {
+  //   if (!("theme" in localStorage)) {
+  //     if (e.matches) {
+  //       element.classList.add("dark");
+  //     } else {
+  //       element.classList.remove("dark");
+  //     }
+  //   }
+  // });
 
   // Render the UI
   return (
