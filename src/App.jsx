@@ -58,7 +58,7 @@ export default function App() {
         onWindowMatch();
         break;
     }
-  }, [theme]);
+  }, [element.classList, onWindowMatch][theme]);
 
   // Add event listener to handle changes in color scheme preference
   darkQuery.addEventListener("change", (e) => {
