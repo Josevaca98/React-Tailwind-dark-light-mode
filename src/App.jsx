@@ -77,7 +77,7 @@ export default function App() {
         onWindowMatch();
         break;
     }
-  }, [theme]);
+  }, [element.classList, onWindowMatch, theme]);
 
   useEffect(() => {
     const handleChange = (e) => {
