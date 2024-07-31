@@ -95,7 +95,7 @@ export default function App() {
     return () => {
       darkQuery.removeEventListener("change", handleChange);
     };
-  }, []);
+  }, [darkQuery, element.classList]);
 
   //#endregion Codigo Modificado
 
