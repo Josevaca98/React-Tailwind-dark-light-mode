@@ -29,8 +29,8 @@ export default function App() {
   // Function to match the window's color scheme preference
   function onWindowMatch() {
     if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) && darkQuery.matches)
+      localStorage.getItem("theme") === "dark" ||
+      (!localStorage.getItem("theme") && darkQuery.matches)
     ) {
       element.classList.add("dark");
     } else {
@@ -39,7 +39,7 @@ export default function App() {
   }
 
   // Initial call to apply the correct theme based on preference
-  onWindowMatch();
+  // onWindowMatch();
 
   // useEffect to update the theme when the theme state changes
   useEffect(() => {
